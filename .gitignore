@@ -1,3 +1,6 @@
+#no copies
+*~
+
 *.py[cod]
 
 # C extensions
