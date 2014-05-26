@@ -1,31 +1,38 @@
-#!/usr/bin/env python
 '''
-Created on May 25, 2014
+Created on May 26, 2014
 
 @author: jerzy
 '''
+from numpy import matrix
+
+class Nussinov(object):
+    '''
+    main algorithm implementation
+    '''
 
 
-def IsOdd(n):
-    """
-     function just to play with unit tests
-    """
-    return n % 2 == 1
-
-
-class DatePattern:
-    """    
-     class just to play with unit tests
-    """
-    def __init__(self, year, month, day):
-        self.year  = year
-        self.month = month
-        self.day   = day
-    
-    def matches(self, date):
-        return ((self.year  and self.year  == date.year  or True) and
-                (self.month and self.month == date.month or True) and
-                self.day == date.day)
-
-if __name__ == '__main__':
-    print "hello world"
+    def __init__(self, chain, energyMatrix):
+        '''
+        Constructor
+        '''
+        self.chain = chain
+        self.chain_length = len(chain)
+        self._initialiseSmatrix()
+        
+    def _initialiseSmatrix(self):
+        self.SMatrix = [(0,0)]
+        
+        
+    def getPairs(self):
+        '''
+        Constructor
+        '''
+        return [(0,0)]
+        
+        
+        
+        
+    def getSMatrix(self):
+        '''
+        Constructor
+        '''
