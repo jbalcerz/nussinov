@@ -6,7 +6,6 @@ Created on May 25, 2014
 '''
 
 
-from numpy import matrix
 import nussinov
 import inputReader
 import outputWriter
@@ -26,7 +25,7 @@ if __name__ == '__main__':
     G      0 3 0 3
     U      2 0 1 0
     """
-    energyMatrix = matrix( [[0,0,0,2],[0,0,3,0],[0,3,0,3],[2,0,1,0]])
+    energyMatrix = [[0,0,0,2],[0,0,3,0],[0,3,0,3],[2,0,1,0]]
      
      
     #main algorithm

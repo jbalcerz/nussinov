@@ -15,6 +15,9 @@ class InputReader(object):
         - check if data is correct (letters in sequence ok?)
         - to the main procedute I want to receive a string containing symbols 
         form group {ACGU} 
+        - as we assume that loops should have at least 4 nucleotides, 
+        then test chain should have at least 6 nucleotides - am I right??????
+        - remember to add exceptions catching - in case of problems with files!!
            
         what to add later:
         - should we read energy matrix form user?
