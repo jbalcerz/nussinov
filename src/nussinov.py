@@ -53,11 +53,22 @@ class Nussinov(object):
     def _buildSmatrix(self):
         for d in xrange(3, self.chain_length):
             i = 0
-            v = []
             for j in xrange(d, self.chain_length): 
-                v.append(self._SMatrix[i+1][j-1] + self._getEnergy(self.chain[i],self.chain[j]))
+                v = []
+                v.append(self._SMatrix[i+1][j-1] 
+                         + self._getEnergy(self.chain[i],self.chain[j]))
                 v.append(self._SMatrix[i+1][j])
                 v.append(self._SMatrix[i][j-1])
-                v.append(max(self._SMatrix[i][k] + self._SMatrix[k+1][j] for k in xrange(i,j-1)))
+                v.append(max([self._SMatrix[i][k] 
+                              + self._SMatrix[k+1][j] for k in xrange(i,j)]))
                 self._SMatrix[i][j] = max(v)
                 i += 1
+                
+                
+                
+                
+                
+                
+                
+                
+                
