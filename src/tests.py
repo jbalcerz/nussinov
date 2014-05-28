@@ -12,14 +12,15 @@ testChain1 = 'GGGAAAACCC'
 alphabet = list('ACGU')
 testEnergyMatrix1 = [[0,0,0,2],[0,0,3,0],[0,3,0,3],[2,0,1,0]]
 testSMatrixForChain1 = [[0, 0, 0, 0, 0, 0, 0, 3, 6, 9], [0, 0, 0, 0, 0, 0, 0, 3, 6, 6], [0, 0, 0, 0, 0, 0, 0, 3, 3, 3], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+testOutputPairs = [(0, 9), (1, 8), (2, 7)]
 
 class NussinovTests(unittest.TestCase):
    
     def test_initialiseSMatrix1(self):
         p = Nussinov(testChain0, testEnergyMatrix1)
         p._initialiseSMatrix();
-#         printMatrix(p.getSMatrix())
         self.assertIsInstance(p.getSMatrix(), list)
+        
     def test_getEnergy1(self):
         p = Nussinov(testChain0, testEnergyMatrix1)
         try:
@@ -39,18 +40,11 @@ class NussinovTests(unittest.TestCase):
         self.assertEqual(p.getSMatrix(), testSMatrixForChain1)
         printMatrix(p.getSMatrix())
         
-         
-#     def test_getPairs1(self):
-#         p = nussinov.Nussinov(testChain1, testEnergyMatrix1)
-#         pairs = p.getPairs();
-#         self.assertIsInstance(pairs, list)
-#          
-#          
-#     def test_getPairs2(self):
-#         p = nussinov.Nussinov(testChain1, testEnergyMatrix1)
-#         pairs = p.getPairs();
-#         self.assertEqual(pairs,  [(0, 7), (1, 6), (2, 5), (3, 4)])
-#          
+    def test_doTraceback(self):
+        p = Nussinov(testChain1, testEnergyMatrix1)
+        p._buildSmatrix()
+        p._doTraceback()
+        self.assertEqual(p.getPairs(), testOutputPairs)
 
         
 

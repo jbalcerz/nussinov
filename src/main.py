@@ -14,27 +14,21 @@ if __name__ == '__main__':
 
 #   here should be called inputReader somehow like: 
 #   chain = inputReader()
-    chain = 'GGGAAAACCC'
-    
-    """
-    example energy matrix:
-    
-    e(i,j) A C G U
-    A      0 0 0 2
-    C      0 0 3 0
-    G      0 3 0 3
-    U      2 0 1 0
-    """
+
+    chain = 'CCCAAAAGGG'
+    print 'input:', chain, '\n'
     energyMatrix = [[0,0,0,2],[0,0,3,0],[0,3,0,3],[2,0,1,0]]
-     
      
     #main algorithm
     x = nussinov.Nussinov(chain,energyMatrix)
-    pairs = x.getPairs();
-    sMatrix = x.getSMatrix(); 
-     
+    x.calculate()
+    pairs = x.getPairs()
+    sMatrix = x.getSMatrix()
+    
+    print 'output:', pairs, '\n'
+    
     #some output formatting
-#     out = OutputWriter(chain,pairs,sMatrix)
+#    out = OutputWriter(chain,pairs,sMatrix)
     
  
  
