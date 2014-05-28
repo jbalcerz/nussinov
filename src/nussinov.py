@@ -3,6 +3,7 @@ Created on May 26, 2014
 
 @author: jerzy
 '''
+import math
 
 class NussinovError(Exception):
     def __init__(self, value):
@@ -55,7 +56,7 @@ class Nussinov(object):
                 i += 1
     
     def _traceback(self,i,j):
-        if self._sMatrix[i][j] == float('nan'):
+        if math.isnan(self._sMatrix[i][j]):
             raise NussinovError('sMatrix is not build yet')
             return
         if i<j:
