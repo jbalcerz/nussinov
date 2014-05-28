@@ -9,6 +9,7 @@ import nussinov
 testChain0 = 'GAAAAC'
 testChain1 = 'GGGAAAACCC'
 
+
 alphabet = list('ACGU')
 testEnergyMatrix1 = [[0,0,0,2],[0,0,3,0],[0,3,0,3],[2,0,1,0]]
 testSMatrixForChain1 = [[0, 0, 0, 0, 0, 0, 0, 3, 6, 9], [0, 0, 0, 0, 0, 0, 0, 3, 6, 6], [0, 0, 0, 0, 0, 0, 0, 3, 3, 3], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
@@ -49,13 +50,42 @@ class NussinovTests(unittest.TestCase):
         
     def test_doTraceback2(self):
         p = nussinov.Nussinov(testChain1, testEnergyMatrix1)
-        p._buildSmatrix()
-        p._doTraceback()
+        p.calculate()
         self.assertEqual(p.getPairs(), testOutputPairs)
 
+
+
+class NussinovWeirdChainsTest(unittest.TestCase):
+
+    def test_doTraceback3(self):
+        p = nussinov.Nussinov('CAAGGAAC', testEnergyMatrix1)
+        p._minLoop = 3
+        p.calculate()
+        self.assertEqual(p.getPairs(), [(0, 3), (4, 7)])
         
-
-
+    def test_doTraceback4(self):
+        p = nussinov.Nussinov('AUAUAUAUA', testEnergyMatrix1)
+        p.calculate()
+        self.assertEqual(p.getPairs(), [(1, 8), (2, 7), (3, 6)])
+        
+    def test_doTraceback5(self):
+        p = nussinov.Nussinov('AUAUAUAUA', testEnergyMatrix1)
+        p.calculate()
+        self.assertEqual(p.getPairs(), [(1, 8), (2, 7), (3, 6)])
+    def test_doTraceback6(self):
+        p = nussinov.Nussinov('AUAUAUAUA', testEnergyMatrix1)
+        p._minLoop = 2
+        p.calculate()
+        self.assertEqual(p.getPairs(), [(1, 8), (2, 7), (3, 6), (4, 5)])
+    def test_doTraceback7(self):
+        p = nussinov.Nussinov('AUAUACUAUA', testEnergyMatrix1)
+        p._minLoop = 2
+        p.calculate()
+        self.assertEqual(p.getPairs(), [(1, 9), (2, 8), (3, 7), (4, 6)])    
+        
+        
+        
+        
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()

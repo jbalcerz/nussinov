@@ -25,10 +25,9 @@ class Nussinov(object):
         self._chain = chain
         self._energyMatrix = energyMatrix  
         self._chain_length = len(chain)
-        if self._chain_length > 5:
-            self._initialiseSMatrix()
-        else:
-            raise NussinovError('Sequence too short!')
+        self._minLoop = 4
+        self._initialiseSMatrix()
+ 
 
     def _getEnergy(self, xi, xj):
         if (xi and xj in self._alphabet):
@@ -37,12 +36,12 @@ class Nussinov(object):
             raise NussinovError('Asked for an energy of not existing tuple of nucleotides!')
         
     def _initialiseSMatrix(self):
-        self._sMatrix = [[ 0 if j-i < 3 else float('nan')
+        self._sMatrix = [[ 0 if j - i < (self._minLoop-1) else float('nan')
                            for j in xrange(self._chain_length)]
                          for i in xrange(self._chain_length)]
         
     def _buildSmatrix(self):
-        for d in xrange(3, self._chain_length):
+        for d in xrange((self._minLoop-1), self._chain_length):
             i = 0
             for j in xrange(d, self._chain_length): 
                 v = []
@@ -59,7 +58,7 @@ class Nussinov(object):
         if math.isnan(self._sMatrix[i][j]):
             raise NussinovError('sMatrix is not build yet')
             return
-        if i<j:
+        if i < j:
             if self._sMatrix[i][j] == self._sMatrix[i+1][j]:
                 self._traceback(i+1,j)
             elif self._sMatrix[i][j] == self._sMatrix[i][j-1]:
@@ -82,6 +81,9 @@ class Nussinov(object):
         self._traceback(0,self._chain_length - 1)           
 
     def calculate(self):
+        if self._chain_length < self._minLoop + 2:
+            self._outputPairs = [()]
+            return 
         self._buildSmatrix()
         self._doTraceback()
                 
