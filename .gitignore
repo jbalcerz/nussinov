@@ -34,9 +34,6 @@ nosetests.xml
 *.mo
 
 # Mr Developer
-.mr.developer.cfg
-.project
-.pydevproject
 
 # exclude folder others
 /others
