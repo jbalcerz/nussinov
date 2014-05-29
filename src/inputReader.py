@@ -6,6 +6,10 @@ Created on May 26, 2014
 
 import sys, getopt, os
 
+from itertools import permutations, combinations, product
+from operator import eq, __eq__
+
+
 class InputReader(object):
     '''
         Let's make a nice class to encapsulate some methods with "_" sign.
@@ -43,17 +47,16 @@ class InputReader(object):
         '''
         self._dafaultInputFile = 'input.txt'
         self._dafaultOutputFile = 'output.txt'
-        self._inputFile = self._dafaultInputFile
-        self._outputFile = self._dafaultOutputFile
         self._minimumChainLength = 2
         self._alphabet = list('ACGU')
-        
         try:
-            opts, args = getopt.getopt(argv,"hi:o:",["ifile=","ofile="])
+            opts, args = getopt.getopt(argv,"hi:o:r:",["ifile=","ofile=","rdata="])
         except getopt.GetoptError:
             self._printHelp()
             sys.exit()
             
+        self._checkIfOptsOk(opts)
+        
         if opts == []:
             self._handleNoOptions()
          
@@ -61,40 +64,64 @@ class InputReader(object):
             if opt == '-h':
                 self._printHelp()
             elif opt in ("-i", "--ifile"):
-                self._inputfile = arg
+                self._handleInputFileGiven(arg)
             elif opt in ("-o", "--ofile"):
-                self._outputfile = arg
-            else:
-                print "wtf"
+                self._handleOutputFileGiven(arg) 
+            elif opt in ("-r", "--rdata"):
+                self._handleRawDataGiven(arg)
 
+    def _checkIfOptsOk(self,opts):
+        x = []
+        for l in list(product(['-i', '--ifile'],['-r', '--rdata'])): 
+            x= x + list(permutations(l))
+        if opts[0] in x:
+            raise InputReaderError(5,"-i and -r options can not be used together")
+            sys.exit(2)
+        
+
+    def _handleInputFileGiven(self, arg):
+        try:
+            self._inputFileObj = open(arg)
+        except IOError as e:
+            if e.errno == 2:
+                self._handleNoInputFile("can not open given input file!")
+    
+    def _handleOutputFileGiven(self,arg):
+        try:
+            self._outputFileObj = open(arg, "w+")
+        except IOError as e:
+            if e.errno == 2:
+                self._handleNoInputFile("can not open given output file!")
+                
+    def _handleRawDataGiven(self,arg):
+        try:
+            self._inputFileObj = open("input.txt", "w+")
+            self._inputFileObj.write(arg)
+        except IOError as e:
+            if e.errno == 2:
+                self._handleNoInputFile("can not create input.txt file")
+    
     def _handleNoOptions(self):
         try:
             self._inputFileObj = open(self._dafaultInputFile)
         except IOError as e:
             if e.errno == 2:
-                self._handleNoInputFile()
+                self._handleNoInputFile("no input file, default: input.txt")
+        try:
+            self._outputFileObj = open(self._dafaultOutputFile, "w+")
+        except IOError as e:
+            if e.errno == 2:
+                self._handleNoInputFile("can not open/create output.txt")
 
-        
+
+
     def _printHelp(self):
         print 'test.py -i <inputfile> -o <outputfile>'
         
-    def _handleNoInputFile(self):
-        raise InputReaderError(1,'no input file given! (default: input.txt)')
+    def _handleNoInputFile(self, message):
+        raise InputReaderError(1,message)
         sys.exit(2)
         
-        
-    def get_one_line(self):
-        try:
-            line = self._inputFileObj.next()
-            if line[-1] == '\n':
-                line = line[0:-1]
-        except StopIteration:
-            self._inputFileObj.close()
-            raise
-        
-        self._check_line(line)
-        return line
-    
     def _check_line(self, line):
         if(len(line) < self._minimumChainLength):
             raise InputReaderError(2,'input string to short!')
@@ -103,13 +130,31 @@ class InputReader(object):
             if x not in self._alphabet :
                 raise InputReaderError(3, 'wrong symbol %s at position %d' % (x, i))
         
-        
+    def __iter__(self):
+        return self        
     
     def next(self):
         return self.get_one_line()
     
-    def __iter__(self):
-        return self
+    def get_one_line(self):
+        try:
+            line = self._inputFileObj.next()
+            if line[-1] == '\n':
+                line = line[0:-1]
+        except StopIteration:
+            self._inputFileObj.close()
+            raise
+        self._check_line(line)
+        return line
+    
+    def get_outputFileObject(self):
+        try:
+            self._outputFileObj
+        except NameError:
+            raise InputReaderError(4, 'output file object was not created')
+        else:
+            return self._outputFileObj
+        
         
 class InputReaderError(Exception):
     def __init__(self, value, message):
