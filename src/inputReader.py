@@ -6,8 +6,7 @@ Created on May 26, 2014
 
 import sys, getopt, os
 
-from itertools import permutations, combinations, product
-from operator import eq, __eq__
+from itertools import permutations,  product
 
 
 class InputReader(object):
@@ -55,11 +54,12 @@ class InputReader(object):
             self._printHelp()
             sys.exit()
             
-        self._checkIfOptsOk(opts)
-        
         if opts == []:
             self._handleNoOptions()
-         
+            return
+        
+        self._checkIfOptsOk(opts)
+        
         for opt, arg in opts:
             if opt == '-h':
                 self._printHelp()
@@ -96,7 +96,9 @@ class InputReader(object):
     def _handleRawDataGiven(self,arg):
         try:
             self._inputFileObj = open("input.txt", "w+")
-            self._inputFileObj.write(arg)
+            self._inputFileObj.write(arg + "\n")
+            self._inputFileObj.close()
+            self._inputFileObj = open("input.txt")
         except IOError as e:
             if e.errno == 2:
                 self._handleNoInputFile("can not create input.txt file")
