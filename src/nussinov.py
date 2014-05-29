@@ -3,14 +3,7 @@ Created on May 26, 2014
 
 @author: jerzy
 '''
-import math
-
-class NussinovError(Exception):
-    def __init__(self, value):
-        self.value = value
-    def __str__(self):
-        return repr(self.value)
-
+import math, os
 
 class Nussinov(object):
     '''
@@ -33,7 +26,7 @@ class Nussinov(object):
         if (xi and xj in self._alphabet):
             return self._energyMatrix[self._alphabet.index(xi)][self._alphabet.index(xj)]
         else:
-            raise NussinovError('Asked for an energy of not existing tuple of nucleotides!')
+            raise NussinovError(1,'Asked for an energy of not existing tuple of nucleotides!')
         
     def _initialiseSMatrix(self):
         self._sMatrix = [[ 0 if j - i < (self._minLoop-1) else float('nan')
@@ -56,7 +49,7 @@ class Nussinov(object):
     
     def _traceback(self,i,j):
         if math.isnan(self._sMatrix[i][j]):
-            raise NussinovError('sMatrix is not build yet')
+            raise NussinovError(2,'sMatrix is not build yet!')
             return
         if i < j:
             if self._sMatrix[i][j] == self._sMatrix[i+1][j]:
@@ -95,6 +88,14 @@ class Nussinov(object):
                 
                 
                 
-                
+
+class NussinovError(Exception):
+    def __init__(self, value, message):
+        self.value = value
+        self.message = message
+    def __str__(self):
+        return ("\nExcepiton: in " +  os.path.basename(__file__) + " module: \n\tcode: " 
+                + repr(self.value) + "\n\tmessage: " + self.message)
+              
                 
                 

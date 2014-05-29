@@ -5,16 +5,14 @@ Created on May 25, 2014
 @author: jerzy
 '''
 
-
+import sys
 import nussinov
 import inputReader
-import outputWriter
+# import outputWriter
 
 if __name__ == '__main__':
 
-#   here should be called inputReader somehow like: 
-#   chain = inputReader()
-
+    received = inputReader.InputReader(sys.argv[1:])
     chain = 'CCCAAAAGGG'
     print 'input:', chain, '\n'
     energyMatrix = [[0,0,0,2],[0,0,3,0],[0,3,0,3],[2,0,1,0]]

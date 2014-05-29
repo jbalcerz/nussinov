@@ -3,8 +3,8 @@ Created on May 26, 2014
 
 @author: jerzy
 '''
-import unittest
-import nussinov
+import nussinov, inputReader
+import unittest, os
 
 testChain0 = 'GAAAAC'
 testChain1 = 'GGGAAAACCC'
@@ -24,11 +24,13 @@ class NussinovTests(unittest.TestCase):
         
     def test_getEnergy1(self):
         p = nussinov.Nussinov(testChain0, testEnergyMatrix1)
-        try:
-            self.assertRaises(nussinov.NussinovError, p._getEnergy('A', 'X'))
-        except nussinov.NussinovError as e:
-            print 'exception occurred:\n', e.value, '\n'
-         
+        with self.assertRaises(nussinov.NussinovError) as cm:
+            p._getEnergy('A', 'X')
+        the_exception = cm.exception
+        self.assertEqual(the_exception.value, 1)
+        print the_exception
+               
+               
     def test_getEnergy2(self):
         p = nussinov.Nussinov(testChain0, testEnergyMatrix1)
         self.assertEqual(p._getEnergy('A','C'),0)
@@ -43,10 +45,12 @@ class NussinovTests(unittest.TestCase):
         
     def test_doTraceback1(self):
         p = nussinov.Nussinov(testChain1, testEnergyMatrix1)
-        try:
-            self.assertRaises(nussinov.NussinovError, p._doTraceback())
-        except nussinov.NussinovError as e:
-            print 'exception occurred:\n', e.value, '\n'
+        with self.assertRaises(nussinov.NussinovError) as cm:
+            p._doTraceback()
+        the_exception = cm.exception
+        self.assertEqual(the_exception.value,2)
+        print the_exception
+        
         
     def test_doTraceback2(self):
         p = nussinov.Nussinov(testChain1, testEnergyMatrix1)
@@ -82,13 +86,7 @@ class NussinovWeirdChainsTest(unittest.TestCase):
         p._minLoop = 2
         p.calculate()
         self.assertEqual(p.getPairs(), [(1, 9), (2, 8), (3, 7), (4, 6)])    
-        
-        
-        
-        
-if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testName']
-    unittest.main()
+
     
 def printMatrix(foo):
     for table in foo:
