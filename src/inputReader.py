@@ -6,6 +6,7 @@ Created on May 26, 2014
 
 import sys, getopt, os
 
+
 from itertools import permutations,  product
 
 
@@ -14,10 +15,6 @@ class InputReader(object):
         Let's make a nice class to encapsulate some methods with "_" sign.
         
         The input should be handeled here. What should it do:
-        - display prompt to the user 
-        - read data from keyboard (one line)...
-        - or ask use for a path and read data form file
-        - check if data is correct (letters in sequence ok?)
         - to the main procedute I want to receive a string containing symbols 
         form group {ACGU} 
         - as we assume that loops should have at least 4 nucleotides, 
@@ -44,6 +41,10 @@ class InputReader(object):
         '''
         Constructor
         '''
+        self._helpText = 'main.py -i <inputfile> -o <outputfile> -r <raw data> \n' \
+                          '\t[-i input.txt -o output.txt]'
+        
+        
         self._dafaultInputFile = 'input.txt'
         self._dafaultOutputFile = 'output.txt'
         self._minimumChainLength = 2
@@ -53,9 +54,12 @@ class InputReader(object):
         except getopt.GetoptError:
             self._printHelp()
             sys.exit()
-            
+        
+        if not ('-o' in opts[0]):
+            self._handleNoOutputGiven()
+
         if opts == []:
-            self._handleNoOptions()
+            self._handleNoOptionsGiven()
             return
         
         self._checkIfOptsOk(opts)
@@ -70,13 +74,23 @@ class InputReader(object):
             elif opt in ("-r", "--rdata"):
                 self._handleRawDataGiven(arg)
 
+    def _handleNoOutputGiven(self):
+        try:
+            self._outputFileObj = open(self._dafaultOutputFile, "w+")
+        except IOError as e:
+            if e.errno == 2:
+                self._handleNoInputFile("can not open default output file!")   
+                 
     def _checkIfOptsOk(self,opts):
         x = []
         for l in list(product(['-i', '--ifile'],['-r', '--rdata'])): 
-            x= x + list(permutations(l))
+            x = x + list(permutations(l))
         if opts[0] in x:
-            raise InputReaderError(5,"-i and -r options can not be used together")
+            raise InputReaderException(5,"-i and -r options can not be used together")
             sys.exit(2)
+        
+
+            
         
 
     def _handleInputFileGiven(self, arg):
@@ -103,7 +117,7 @@ class InputReader(object):
             if e.errno == 2:
                 self._handleNoInputFile("can not create input.txt file")
     
-    def _handleNoOptions(self):
+    def _handleNoOptionsGiven(self):
         try:
             self._inputFileObj = open(self._dafaultInputFile)
         except IOError as e:
@@ -118,19 +132,22 @@ class InputReader(object):
 
 
     def _printHelp(self):
-        print 'test.py -i <inputfile> -o <outputfile>'
+        print self._helpText
+        sys.exit(2)
         
     def _handleNoInputFile(self, message):
-        raise InputReaderError(1,message)
+        raise InputReaderException(1,message)
         sys.exit(2)
         
     def _check_line(self, line):
         if(len(line) < self._minimumChainLength):
-            raise InputReaderError(2,'input string to short!')
+            raise InputReaderException(2,'input string to short!')
+           
         
         for i,x in enumerate(line):
             if x not in self._alphabet :
-                raise InputReaderError(3, 'wrong symbol %s at position %d' % (x, i))
+                raise InputReaderException(3, 'wrong symbol %s at position %d' % (x, i))
+               
         
     def __iter__(self):
         return self        
@@ -153,19 +170,34 @@ class InputReader(object):
         try:
             self._outputFileObj
         except NameError:
-            raise InputReaderError(4, 'output file object was not created')
+            raise InputReaderException(4, 'output file object was not created')
         else:
             return self._outputFileObj
+    def closeFiles(self):
         
+        try:
+            self._outputFileObj
+        except NameError:
+            pass
+        else:
+            self._outputFileObj.close()
         
-class InputReaderError(Exception):
+        try:
+            self._inputFileObj
+        except NameError:
+            pass
+        else:
+            self._inputFileObj.close()
+        
+class InputReaderException(Exception):
     def __init__(self, value, message):
         self.value = value
         self.message = message
-        print self.__str__()
+ 
+        
+        
     def __str__(self):
-        return ("\nExcepiton: in " +  os.path.basename(__file__) + " module: \n\tcode: " 
-          + repr(self.value) + "\n\tmessage: " + self.message)
+        return ("\nERROR (" + str(self.value) + "): " +  self.message)
               
         
         

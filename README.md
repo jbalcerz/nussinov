@@ -5,6 +5,8 @@ nussinov
 
 
 
+
+
 Odnośnie szczegółów: 
 1. jako że Panowie chcą aplikację w Pythonie, to chciałbym, aby w prosty i wygodny sposób można było wprawadzać ciągi znaków zarówno "z palca", jak i z plików. 
 2. Chciałbym również, aby aplikacja była dostarczna z szeregiem testów, które weryfikują poprawność działania algorytmu. 

@@ -17,7 +17,7 @@ class InputReaderTest(unittest.TestCase):
         except OSError:
             pass
          
-        with self.assertRaises(inputReader.InputReaderError) as cm:
+        with self.assertRaises(inputReader.InputReaderException) as cm:
             inputReader.InputReader('')
         the_exception = cm.exception
         self.assertEqual(the_exception.value,1)
@@ -67,7 +67,7 @@ class InputReaderTest(unittest.TestCase):
                  
     def test_InputReader_ReadSpecyficFile(self):
          
-        with self.assertRaises(inputReader.InputReaderError) as cm:
+        with self.assertRaises(inputReader.InputReaderException) as cm:
             inputReader.InputReader(['-i', 'exampleInput2.txt'])
         the_exception = cm.exception
         self.assertEqual(the_exception.value,1)
@@ -99,10 +99,11 @@ class InputReaderTest(unittest.TestCase):
     def test_InputReader_RawInput(self):
         
         
-        with self.assertRaises(inputReader.InputReaderError) as cm:
+        with self.assertRaises(inputReader.InputReaderException):
             inputReader.InputReader(['-i', '-r'])
-        with self.assertRaises(inputReader.InputReaderError) as cm:
+        with self.assertRaises(inputReader.InputReaderException):
             inputReader.InputReader(["-r", "-i"])
+            
 
         p = inputReader.InputReader(['-r', 'GGGAAAACCC'])
         self.assertEqual(p.next(), 'GGGAAAACCC')

@@ -8,11 +8,27 @@ Created on May 25, 2014
 import sys
 import nussinov
 import inputReader
+from inputReader import InputReaderException
 # import outputWriter
+
+
 
 if __name__ == '__main__':
 
-    receivedChains = inputReader.InputReader(sys.argv[1:])
+    sys.tracebacklimit=0
+    try:
+        receivedChains = inputReader.InputReader(sys.argv[1:])
+    except InputReaderException as er:
+        print er
+        try:
+            receivedChains
+        except NameError:
+            pass
+        else:
+            receivedChains.closeFiles()
+            sys.exit(2)
+           
+       
     
     for chain in receivedChains:
         
@@ -24,9 +40,14 @@ if __name__ == '__main__':
         pairs = x.getPairs()
         sMatrix = x.getSMatrix()
             
-        print 'output:', pairs, '\n'
+        print 'output:', pairs
+        
+        (receivedChains.get_outputFileObject()).write(str(pairs) + '\n')
+        
     
-
+    receivedChains.closeFiles()
+    sys.exit(0)
+           
     #TODO: obsluga wyjscia
  
  
