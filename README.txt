@@ -14,7 +14,18 @@ python main.py -r GGGGGAAAACCCCC
 python main.py -r GGGGGAAAACCCCC -o output2.txt
 
 
-
+TODO:
+    - napisać testy funkcjonalności głównego skryptu typu "black box", 
+      jak coś się znajdzie - naprawić
+    - przygotować ok. 10-20 (od prostych do skomplikowanych) ciągów RNA do testów
+      i przeprowadzić testy, naprawić jeśli się coś wali, dodać testy wydajnościowe
+    - uruchomić automatyczną dokumentację kodu, dopisać dokumentację w kodzie
+    - przygotować kod dla różnych platform i potestowac je (sprawdzić jak to 
+      smiga dla różnych wersji znacznika nowej linii na różnych platformach)
+    - przygotować wersje executable dla różnych platform
+    - porównać wyniki testów z innymi aplikacjami i zawrzec to w końcowym sprawozdaniu
+    - napisać dokumentacje końcową ok. 4 strony (zawierająca podsumowanie i wyniki badań), 
+      koniecznie opisać która wersja algorytmu traceback została użyta
 
 
 
