@@ -12,30 +12,7 @@ from itertools import permutations,  product
 
 class InputReader(object):
     '''
-        Let's make a nice class to encapsulate some methods with "_" sign.
-        
-        The input should be handeled here. What should it do:
-        - to the main procedute I want to receive a string containing symbols 
-        form group {ACGU} 
-        - as we assume that loops should have at least 4 nucleotides, 
-        then test chain should have at least 6 nucleotides - am I right??????
-        - remember to add exceptions catching - in case of problems with files!!
-           
-        what to add later:
-        - should we read energy matrix form user?
-        - should we read the smallest noumber of elements in a loop? 
-          (compare pages 43 and 48 in Nowak's lecture notes)
-        - in case of reading from file: maybe read each line of file as separate 
-          chain and make it possible to iterate through them?
-        - read data form RNA STRAND database - it is actual database that you 
-          can download (around 30MB) form http://www.rnasoft.ca/strand/ 
-          using this would be really nice! 
-          (watch out - there is a special formatting and more than 4 symbols in chains)
-        
-        
-        
-        1. co jesli sie nic nie wpisze? 
-            - 
+
     '''
     def __init__(self,argv):
         '''

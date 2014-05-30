@@ -7,11 +7,17 @@ nussinov
 przykłady użycia:
 
 python main.py -h
+
 python main.py
+
 python main.py -i exampleInput.txt 
+
 python main.py -i exampleInput.txt -o output1.txt
+
 python main.py -r GGGGGAAAACCCCC 
+
 python main.py -r GGGGGAAAACCCCC -o output2.txt
+
 
 
 

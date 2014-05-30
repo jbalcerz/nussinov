@@ -9,13 +9,14 @@ import sys
 import nussinov
 import inputReader
 from inputReader import InputReaderException
-# import outputWriter
 
+'''
 
+'''
 
 if __name__ == '__main__':
 
-    sys.tracebacklimit=0
+#     sys.tracebacklimit=0
     try:
         receivedChains = inputReader.InputReader(sys.argv[1:])
     except InputReaderException as er:
@@ -48,7 +49,7 @@ if __name__ == '__main__':
     receivedChains.closeFiles()
     sys.exit(0)
            
-    #TODO: obsluga wyjscia
+
  
  
  
