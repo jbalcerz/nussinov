@@ -72,7 +72,7 @@ class InputReader(object):
     def _handleInputFileGiven(self, arg):
         try:
             self._inputFileObj = open(arg)
-        except IOError:
+        except AttributeError, IOError:
             print>>sys.stderr,'Error: Can\'t open given input file.'
             sys.exit(2);
 
@@ -130,20 +130,18 @@ class InputReader(object):
     
     def next(self):
         return self.get_one_line()
-    
-    
-    def get_one_line(self):
+
+
+    def get_inputFileObject(self):
         try:
-            line = self._inputFileObj.next()
-            if line[-1] == '\n':
-                line = line[0:-1]
-        except StopIteration:
-            self._inputFileObj.close()
-            raise
-        self._check_line(line)
-        return line
-    
-    
+            self._inputFileObj
+        except NameError:
+            print>>sys.stderr,'Error: Input file object wasn\'t created'
+            sys.exit(4);
+        else:
+            return self._inputFileObj
+            
+            
     def get_outputFileObject(self):
         try:
             self._outputFileObj
@@ -152,6 +150,18 @@ class InputReader(object):
             sys.exit(4);
         else:
             return self._outputFileObj
+
+
+    def get_one_line(self):
+        try:
+            line = get_inputFileObject.next()
+            if line[-1] == '\n':
+                line = line[0:-1]
+        except StopIteration:
+            self._inputFileObj.close()
+            raise
+        self._check_line(line)
+        return line
 
 
     def closeFiles(self):
