@@ -16,11 +16,11 @@ from inputReader import InputReaderException
 
 if __name__ == '__main__':
 
-#     sys.tracebacklimit=0
-    try:
+#sys.tracebacklimit=0
+     try:
         receivedChains = inputReader.InputReader(sys.argv[1:])
-    except InputReaderException as er:
-        print er
+     except InputReaderException as er:
+        print(er)
         try:
             receivedChains
         except NameError:
@@ -31,23 +31,23 @@ if __name__ == '__main__':
            
        
     
-    for chain in receivedChains:
+        for chain in receivedChains:
         
-        print 'input:', chain
+            print('input:'), chain
         
-        energyMatrix = [[0,0,0,2],[0,0,3,0],[0,3,0,3],[2,0,1,0]]
-        x = nussinov.Nussinov(chain,energyMatrix)
-        x.calculate()
-        pairs = x.getPairs()
-        sMatrix = x.getSMatrix()
+            energyMatrix = [[0,0,0,2],[0,0,3,0],[0,3,0,3],[2,0,1,0]]
+            x = nussinov.Nussinov(chain,energyMatrix)
+            x.calculate()
+            pairs = x.getPairs()
+            sMatrix = x.getSMatrix()
             
-        print 'output:', pairs
+        print('output:'), pairs
         
         (receivedChains.get_outputFileObject()).write(str(pairs) + '\n')
         
     
-    receivedChains.closeFiles()
-    sys.exit(0)
+        receivedChains.closeFiles()
+        sys.exit(0)
            
 
  

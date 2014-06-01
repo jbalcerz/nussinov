@@ -31,13 +31,22 @@ class InputReader(object):
         except getopt.GetoptError:
             self._printHelp()
             sys.exit()
-        
+        '''
         if not ('-o' in opts[0]):
             self._handleNoOutputGiven()
 
         if opts == []:
             self._handleNoOptionsGiven()
             return
+        '''
+        if opts == []:
+            self._handleNoOptionsGiven()
+            return
+        
+        '''
+        if not ('-o' in opts[0]):
+            self._handleNoOutputGiven()
+        '''
         
         self._checkIfOptsOk(opts)
         
@@ -97,19 +106,25 @@ class InputReader(object):
     def _handleNoOptionsGiven(self):
         try:
             self._inputFileObj = open(self._dafaultInputFile)
-        except IOError as e:
-            if e.errno == 2:
-                self._handleNoInputFile("no input file, default: input.txt")
+            #except IOError as e:
+            #if e.errno == 2:
+            #   self._handleNoInputFile("no input file, default: input.txt")
+        except IOError:
+            print>>sys.stderr,'Error: No input file, using default file \"input.txt\" instead.'
+            sys.exit(2);
         try:
             self._outputFileObj = open(self._dafaultOutputFile, "w+")
-        except IOError as e:
-            if e.errno == 2:
-                self._handleNoInputFile("can not open/create output.txt")
+            #except IOError as e:
+            #if e.errno == 2:
+            #   self._handleNoInputFile("can not open/create output.txt")
+        except IOError:
+            print>>sys.stderr,'Error: Can\'t open/create output file \"input.txt\".'
+            sys.exit(2);
 
 
 
     def _printHelp(self):
-        print self._helpText
+        print(self._helpText)
         sys.exit(2)
         
     def _handleNoInputFile(self, message):
@@ -118,12 +133,15 @@ class InputReader(object):
         
     def _check_line(self, line):
         if(len(line) < self._minimumChainLength):
-            raise InputReaderException(2,'input string to short!')
-           
+            #raise InputReaderException(2,'input string too short!')
+            print>>sys.stderr,'Error: Input string is too short!'
+            sys.exit(2);
         
         for i,x in enumerate(line):
             if x not in self._alphabet :
-                raise InputReaderException(3, 'wrong symbol %s at position %d' % (x, i))
+            #raise InputReaderException(3, 'wrong symbol %s at position %d' % (x, i))
+                print>>sys.stderr,'Error: Wrong symbol \'%s\' at position %d' % (x,i)
+                sys.exit(3);
                
         
     def __iter__(self):
@@ -147,7 +165,9 @@ class InputReader(object):
         try:
             self._outputFileObj
         except NameError:
-            raise InputReaderException(4, 'output file object was not created')
+            #raise InputReaderException(4, 'output file object was not created')
+            print>>sys.stderr,'Error: Output file object wasn\'t created'
+            sys.exit(4);
         else:
             return self._outputFileObj
     def closeFiles(self):
