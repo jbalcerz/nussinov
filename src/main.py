@@ -9,13 +9,15 @@ import sys
 import nussinov
 import inputReader
 from inputReader import InputReaderException
+from timer import Timer
 
 '''
     
     '''
 
 if __name__ == '__main__':
-    
+
+ with Timer() as t:
     #     sys.tracebacklimit=0
     try:
         receivedChains = inputReader.InputReader(sys.argv[1:])
@@ -45,9 +47,10 @@ if __name__ == '__main__':
         
         (receivedChains.get_outputFileObject()).write(str(pairs) + '\n')
     
-    
+
     receivedChains.closeFiles()
-    sys.exit(0)
+ print "=> elapsed time: %s s" % t.secs
+ sys.exit(0)
 
            
 
