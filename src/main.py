@@ -43,6 +43,7 @@ def main(sys_arguments):
         (data.get_outputFileObject()).write(str(pairs) + '\n')
     
         G = nx.Graph()
+
         G.add_edges_from(pairs)
         nx.draw(G)
         plt.show()
