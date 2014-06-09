@@ -13,7 +13,7 @@ class InputReader(object):
     '''
         
         '''
-    @profile
+    #@profile
     def __init__(self,argv):
         '''
             Constructor
