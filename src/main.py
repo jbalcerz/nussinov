@@ -7,6 +7,8 @@
 
 import sys
 import nussinov, inputReader
+import networkx as nx
+import matplotlib.pyplot as plt
 from timer import Timer
 
 '''
@@ -40,6 +42,10 @@ def main(sys_arguments):
         
         (data.get_outputFileObject()).write(str(pairs) + '\n')
     
+        G = nx.Graph()
+        G.add_edges_from(pairs)
+        nx.draw(G)
+        plt.show()
 
     data.closeFiles()
     return 0
