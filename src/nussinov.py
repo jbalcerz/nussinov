@@ -10,7 +10,7 @@ class Nussinov(object):
     main algorithm implementation
     '''
 
-    def __init__(self, chain, energyMatrix):
+    def __init__(self, chain, minLoop, energyMatrix):
         '''
         Constructor
         '''
@@ -18,7 +18,7 @@ class Nussinov(object):
         self._chain = chain
         self._energyMatrix = energyMatrix  
         self._chain_length = len(chain)
-        self._minLoop = 4
+        self._minLoop = minLoop
         self._initialiseSMatrix()
  
 
@@ -26,7 +26,7 @@ class Nussinov(object):
         if (xi and xj in self._alphabet):
             return self._energyMatrix[self._alphabet.index(xi)][self._alphabet.index(xj)]
         else:
-            raise NussinovError(1,'Asked for an energy of not existing tuple of nucleotides!')
+            raise NussinovException(1,'Asked for an energy of not existing tuple of nucleotides!')
         
     def _initialiseSMatrix(self):
         self._sMatrix = [[ 0 if j - i < (self._minLoop-1) else float('nan')
@@ -49,7 +49,7 @@ class Nussinov(object):
     
     def _traceback(self,i,j):
         if math.isnan(self._sMatrix[i][j]):
-            raise NussinovError(2,'sMatrix is not build yet!')
+            raise NussinovException(2,'sMatrix is not build yet!')
             return
         if i < j:
             if self._sMatrix[i][j] == self._sMatrix[i+1][j]:
@@ -89,13 +89,15 @@ class Nussinov(object):
                 
                 
 
-class NussinovError(Exception):
+class NussinovException(Exception):
     def __init__(self, value, message):
         self.value = value
         self.message = message
     def __str__(self):
         return ("\nExcepiton: in " +  os.path.basename(__file__) + " module: \n\tcode: " 
                 + repr(self.value) + "\n\tmessage: " + self.message)
-              
+        
+    
+    
                 
                 

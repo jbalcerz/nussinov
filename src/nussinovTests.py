@@ -24,7 +24,7 @@ class NussinovTests(unittest.TestCase):
         
     def test_getEnergy1(self):
         p = nussinov.Nussinov(testChain0, testEnergyMatrix1)
-        with self.assertRaises(nussinov.NussinovError) as cm:
+        with self.assertRaises(nussinov.NussinovException) as cm:
             p._getEnergy('A', 'X')
         the_exception = cm.exception
         self.assertEqual(the_exception.value, 1)
@@ -45,7 +45,7 @@ class NussinovTests(unittest.TestCase):
         
     def test_doTraceback1(self):
         p = nussinov.Nussinov(testChain1, testEnergyMatrix1)
-        with self.assertRaises(nussinov.NussinovError) as cm:
+        with self.assertRaises(nussinov.NussinovException) as cm:
             p._doTraceback()
         the_exception = cm.exception
         self.assertEqual(the_exception.value,2)

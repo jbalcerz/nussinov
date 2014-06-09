@@ -6,51 +6,53 @@
     '''
 
 import sys
-import nussinov
-import inputReader
-from inputReader import InputReaderException
+import nussinov, inputReader
 from timer import Timer
 
 '''
     
     '''
 
-if __name__ == '__main__':
-
- with Timer() as t:
-    #     sys.tracebacklimit=0
+def main(sys_arguments):
     try:
-        receivedChains = inputReader.InputReader(sys.argv[1:])
-    except InputReaderException as er:
-        print er
-        try:
-            receivedChains
-        except NameError:
-            pass
-        else:
-            receivedChains.closeFiles()
-            sys.exit(2)
+        data = inputReader.InputReader(sys_arguments)
+    except inputReader.InputReaderException as er:
+            print er
+            return 1
     
     
-    
-    for chain in receivedChains:
+    for chain in data:
         
         print 'input:', chain
         
-        energyMatrix = [[0,0,0,2],[0,0,3,0],[0,3,0,3],[2,0,1,0]]
-        x = nussinov.Nussinov(chain,energyMatrix)
-        x.calculate()
-        pairs = x.getPairs()
-        sMatrix = x.getSMatrix()
-        
+        try:
+            x = nussinov.Nussinov(chain,data.get_MinLoop(),data.get_EnergyMatrix())
+            x.calculate()
+            pairs = x.getPairs()
+#             sMatrix = x.getSMatrix()
+
+        except nussinov.NussinovException as er:
+            print er
+            data.closeFiles()
+            return 1
+            
         print 'output:', pairs
         
-        (receivedChains.get_outputFileObject()).write(str(pairs) + '\n')
+        (data.get_outputFileObject()).write(str(pairs) + '\n')
     
 
-    receivedChains.closeFiles()
- print "=> elapsed time: %s s" % t.secs
- sys.exit(0)
+    data.closeFiles()
+    return 0
+
+
+if __name__ == '__main__':
+    
+#     sys.tracebacklimit=0
+    with Timer() as t:
+        ret = main(sys.argv[1:])
+       
+    print "=> elapsed time: %s s" % t.secs
+    sys.exit(ret)
 
            
 
