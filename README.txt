@@ -3,30 +3,14 @@ nussinov
 
  Implementacja algorytmu Nussinov do obliczania struktury drugorzędowej DNA i RNA
 
+ Dokumentacja znajduje się w materialy/dokumentacjaKoncowa
 
 przykłady użycia:
 
-python main.py -h
-python main.py
-python main.py -r GGGGGAAAACCCCC 
-python main.py -r GGGGGAAAACCCCC -o output1.txt
-python main.py -i sequences/1.txt -o output2.txt
+python nussinovCalculator.py -h
+python nussinovCalculator.py
+python nussinovCalculator.py -r GGGGGAAAACCCCC 
+python nussinovCalculator.py -r GGGGGAAAACCCCC -o output1.txt
+python nussinovCalculator.py -i sequences/1.txt -o output2.txt
 
-
-TODO:
-
-Jerzy:
-	- napisać wstęp, opis algorytmu, opis narzędzi
-	- scalić dwie częśći sprawozadania
-	- napisać komentarze w kodzie i zrobić automatyczną dokumentację kodu
-
-Olek:
-	- poprawić skrypty do testów jesli trzeba
-	- napisać do sprawka:
-		- teoretycznie o testach - jakie przeprowadziliśmy, 
-		  ide danych testowych, skąd (dokładnie opisać źródło!)
-		- co wnioskujesz z testów
-		- porównanie z innymi programami
-	- dokończyć wizualizację
-	- przygotować releasy na różne platformy (napisać makefile?)
 

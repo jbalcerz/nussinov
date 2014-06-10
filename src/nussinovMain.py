@@ -3,6 +3,8 @@
     Created on May 25, 2014
     
     @author: jerzy
+    
+    main script of the program
     '''
 
 import sys

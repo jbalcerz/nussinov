@@ -2,6 +2,8 @@
     Created on May 26, 2014
     
     @author: jerzy
+    
+    input parsing and its correctenes check
     '''
 
 import sys, getopt, ast
