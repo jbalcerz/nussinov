@@ -50,7 +50,7 @@ def visualisation(chain,pairs):
         G.add_edges_from([(i,i+1) for i in a[:-1]])
         
         G.add_edges_from(pairs)
-        nx.draw(G)
+        nx.draw_spectral(G)
         plt.show()
         
         
