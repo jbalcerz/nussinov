@@ -16,8 +16,6 @@ python main.py -i sequences/1.txt -o output2.txt
 TODO:
 
 Jerzy:
-	- potestować działanie nowych funkcjonalności -minLoop -energyMatrix
-	- stworzyc sprawko w LaTex
 	- napisać wstęp, opis algorytmu, opis narzędzi
 	- scalić dwie częśći sprawozadania
 	- napisać komentarze w kodzie i zrobić automatyczną dokumentację kodu
