@@ -14,6 +14,10 @@
 #  The -l option tells kernprof to inject the @profile decorator into our script’s builtins, and -v tells kernprof to display timing information once our script finishes.
 #  Results of the test are being written to 'line_profiler_test.txt' file.
 #  Look for lines with a high amount of hits or a high time interval. These are the areas where optimizations can yield the greatest improvements.
-
-echo "Testing using line-to-line profiler:" > line_profiler_test.txt
-kernprof.py -l -v main.py -i sequences/1.txt -o output.txt >> line_profiler_test.txt
+if [ "$1" == "" ]
+then
+echo "You need to pass the nussinovCalculator.py file path and its arguments"
+exit 1
+fi
+echo "Testing using line-to-line profiler:" > blackBoxTestsAndProfiling/line_profiler_test.txt
+kernprof.py -l -v "$1" >> blackBoxTestsAndProfiling/line_profiler_test.txt
