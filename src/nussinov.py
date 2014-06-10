@@ -20,33 +20,38 @@ class Nussinov(object):
         self._chain_length = len(chain)
         self._minLoop = minLoop
         self._initialiseSMatrix()
- 
+
+    def _initialiseSMatrix(self):
+        self._sMatrix = [[ 0 if j - i <= self._minLoop else float('nan')
+                           for j in xrange(self._chain_length)]
+                         for i in xrange(self._chain_length)]
 
     def _getEnergy(self, xi, xj):
         if (xi and xj in self._alphabet):
             return self._energyMatrix[self._alphabet.index(xi)][self._alphabet.index(xj)]
         else:
             raise NussinovException(1,'Asked for an energy of not existing tuple of nucleotides!')
-        
-    def _initialiseSMatrix(self):
-        self._sMatrix = [[ 0 if j - i < (self._minLoop-1) else float('nan')
-                           for j in xrange(self._chain_length)]
-                         for i in xrange(self._chain_length)]
-        
+
+                
     def _buildSmatrix(self):
-        for d in xrange((self._minLoop-1), self._chain_length):
+        for d in xrange(1, self._chain_length):
             i = 0
             for j in xrange(d, self._chain_length): 
-                v = []
-                v.append(self._sMatrix[i+1][j-1] 
-                         + self._getEnergy(self._chain[i],self._chain[j]))
-                v.append(self._sMatrix[i+1][j])
-                v.append(self._sMatrix[i][j-1])
-                v.append(max([self._sMatrix[i][k] 
-                              + self._sMatrix[k+1][j] for k in xrange(i,j)]))
-                self._sMatrix[i][j] = max(v)
+                if (j-i<=self._minLoop):
+                    self._sMatrix[i][j] = 0
+                else:
+                    v = []
+                    v.append(self._sMatrix[i+1][j-1] 
+                             + self._getEnergy(self._chain[i],self._chain[j]))
+                    v.append(self._sMatrix[i+1][j])
+                    v.append(self._sMatrix[i][j-1])
+                    v.append(max([self._sMatrix[i][k] 
+                                  + self._sMatrix[k+1][j] for k in xrange(i,j)]))
+                    self._sMatrix[i][j] = max(v)
                 i += 1
-    
+                
+                
+                
     def _traceback(self,i,j):
         if math.isnan(self._sMatrix[i][j]):
             raise NussinovException(2,'sMatrix is not build yet!')

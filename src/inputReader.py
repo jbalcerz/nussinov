@@ -54,7 +54,7 @@ class InputReader(object):
                     self._handleOutputFileGiven(arg)
                 elif opt in ("-r", "--rdata"):
                     self._handleRawDataGiven(arg)
-                elif opt == "-m":#trzeba zrobic handler
+                elif opt == "-m":
                     self._handleMinLoop(arg)
                 elif opt == "-e":
                     self._handleEnergyMatrix(arg)
@@ -69,11 +69,11 @@ class InputReader(object):
               
     
     def _handleEnergyMatrix(self, arg):
+        l = len(self._alphabet)
         try:
             tmp = ast.literal_eval(arg)
-            if (numpy.array(tmp).shape == (4,4)):
+            if (numpy.array(tmp).shape == (l,l)):
                 self._EnergyMatrix = tmp
-                print tmp
             else:
                 raise InputReaderException(7,self, 'wrong size of an energy matrix')
         except:
