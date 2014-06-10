@@ -4,9 +4,9 @@
     @author: jerzy
     '''
 
-import sys, getopt, os, ast
+import sys, getopt, ast
 import numpy
-from itertools import permutations,  product, combinations
+from itertools import combinations
 
 
 class InputReader(object):
