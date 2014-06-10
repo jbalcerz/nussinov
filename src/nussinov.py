@@ -51,7 +51,7 @@ class Nussinov(object):
                 i += 1
                 
                 
-                
+                #@profile
     def _traceback(self,i,j):
         if math.isnan(self._sMatrix[i][j]):
             raise NussinovException(2,'sMatrix is not build yet!')
