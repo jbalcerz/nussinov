@@ -12,6 +12,6 @@ python nussinovCalculator.py -h
 python nussinovCalculator.py
 python nussinovCalculator.py -r GGGGGAAAACCCCC 
 python nussinovCalculator.py -r GGGGGAAAACCCCC -o output1.txt
-python nussinovCalculator.py -i sequences/1.txt -o output2.txt
+python nussinovCalculator.py -i examplSeq/1.txt -o output2.txt
 
 
