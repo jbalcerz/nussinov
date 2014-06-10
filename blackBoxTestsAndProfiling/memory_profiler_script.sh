@@ -14,4 +14,4 @@
 # Results of the test are being saved to the 'memory_profile_test.txt' file.
 
 echo "Testing using memory profiler:" > memory_profiler_test.txt
-python -m memory_profiler main.py -i sequences/1.txt -o output.txt >> memory_profiler_test.txt
+python -m memory_profiler nussinovCall.py -i input.txt -o output.txt >> memory_profiler_test.txt
