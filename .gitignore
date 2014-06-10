@@ -39,5 +39,10 @@ nosetests.xml
 .pydevproject
 
 
-# exclude folder others
-/others
+#exclude files that appear after runnning main script
+output.txt
+lastRawInput.txt
+
+
+
+
