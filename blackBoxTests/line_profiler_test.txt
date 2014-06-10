@@ -1,6 +1,6 @@
 Testing using line-to-line profiler:
 input: GGGAAAACCC
 output: [(0, 9), (1, 8), (2, 7)]
-Wrote profile results to nussinovCalculator.py.lprof
+Wrote profile results to nussinovCall.py.lprof
 Timer unit: 1e-06 s
 
