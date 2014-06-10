@@ -18,6 +18,10 @@ Dr Robert Nowak. Slajdy do wykładu "Metody Bioinformatyki (MBI)"). Politechnika
 Prof. Dr. Daniel Huson, Dr. Christoph Dieterich . "Sript for Algorithms in Bioinformatics I Lecture". The University of Tübingen, \url{http://ab.inf.uni-tuebingen.de/teaching/ws06/albi1/script/protstruct2d_20Dec2006.pdf}
 
 
+\bibitem{bib:innaApp}
+RNA Secondary Structure Prediction and Analysis on the web \url{http://rna.urmc.rochester.edu/RNAstructureWeb/Servers/Predict1/Predict1.html}
+
+
 \bibitem{bib:baza}
 RNA STRAND v2.0 - The RNA secondary STRucture and statistical ANalysis Database,
 \url{http://www.rnasoft.ca/strand/}
