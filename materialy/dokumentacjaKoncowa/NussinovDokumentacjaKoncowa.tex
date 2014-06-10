@@ -94,7 +94,7 @@ Oleg Druzhynets} % Your name
 
 \section{Cel projektu}
 
-	Celem projektu była implementacja programu obliczającego strukturę drugorzędową cząsteczki DNA lub RNA wykorzystując algorytm Nussinov.
+	Celem projektu było opracowanie programu obliczającego strukturę drugorzędową cząsteczki DNA lub RNA wykorzystującego algorytm Nussinov.
 
 %----------------------------------------------------------------------------------------
 
@@ -104,27 +104,23 @@ Oleg Druzhynets} % Your name
 
 \section{Użyte technologie}
 
-Stworzony program został całkowicie przygotowany w języku Python w standardowej wersji 2.7. Wybór padł właśnie na ten język programowania przede wszystkim ze względu na jego obiektowy charakter, przejrzystość składni oraz bogactwo bibliotek. 
-
-Duża część kodu głównego algorytmu oraz modułu obsługi wejścia została przygotowywana w duchu metodyki Test Driven Developement (TDD). Świetnym narzędziem wykorzystanym podczas prac okazał się więc framework pyUnit.
-
-Ponaddto, do testów gotowego już programu wykorzystano: ... Wizualizacja otrzymanych wyników została oparta o bibliotekę networkx.
+Stworzony program został całkowicie przygotowany w języku Python w standardowej wersji 2.7. Wybór padł właśnie na ten język programowania przede wszystkim ze względu na jego obiektowy charakter, przejrzystość składni oraz bogactwo bibliotek. Duża część kodu głównego algorytmu oraz modułu obsługi wejścia została przygotowywana w duchu metodyki Test Driven Developement (TDD). Świetnym narzędziem wykorzystanym podczas prac okazał się więc framework pyUnit. Ponaddto, do testów gotowego już programu wykorzystano dodatkowe narzędzia opisane w dalszych częściach poniższego sprawozdania. Wizualizacja otrzymanych wyników została oparta o bibliotekę networkx.
 
 \section{Osiągnięta funkcjonalność aplikacji}
 
-W ramach projektu stworzono prostą w obsłudze aplikację konsolową (nussinovCalculator.py). Jej funkcjonalność można opisać następująco:
+W ramach projektu stworzono prostą w obsłudze aplikację konsolową (skrypt) \mbox{nussinovCalculator.py}. Podstawową funkcjonalność programu można opisać następująco:
 
 \begin{itemize}
 	\item Pomoc dla użytkownika - wywołanie programu z parametrem -h wyświetla pulę obsługiwanych opcji oraz ich domyślne parametry.
-	\item Wejście - wywołanie programu z opcją -i oraz podaną nazwą pliku (np. ./nussinovCalculator.py -i "NazwaPliku.txt") spowoduje odczytanie z pliku ciągów nukleotydów (można podać ich wiele w kilku linijkach) i przeprowadzenie algorytmu nussinov dla każdego z nich. Program można wywołać bez tej opcji (wtedy domyślnie odczytywane są dane z pliku "input.txt"), jak również podać ciąg nukleotydów prosto do konsoli używając opcji \mbox{-r} (np. \mbox{-r} GGGAAAACCC)
-	\item Wyjście - domyślnie program wypisuje wynik na konsolę oraz zwraca plik "output.txt" w postaci listy par indeksów nukleotydów które będą połączone w strukturze drugorzędowej. Uzywając opcji -o można wskazać plik do którego dane mają być zapisane (np. -o outputs/out1.txt).
+	\item Wejście - wywołanie programu z opcją -i oraz nazwą pliku (np. ./nussinovCalculator.py -i "NazwaPliku.txt") spowoduje odczytanie z pliku ciągów nukleotydów (można podać ich wiele w kilku linijkach) i przeprowadzenie przewidywania struktury drugorzędowej dla każdego z nich. Program można wywołać bez tej opcji (wtedy domyślnie odczytywane są dane z pliku "input.txt"), jak również podać ciąg symboli nukleotydów prosto do konsoli używając opcji \mbox{-r} (np. \mbox{-r} GGGAAAACCC)
+	\item Wyjście - domyślnie program wypisuje wynik na konsolę oraz zwraca plik "output.txt" w postaci listy par indeksów nukleotydów, które łączą się w strukturze drugorzędowej. Uzywając opcji -o można wskazać plik do którego dane mają być zapisane (np. -o outputs/out1.txt).
 	\item Parametryzacja algorytmu - przy uruchamianiu programu użytkownik może dodatkowo wprowadzić:
 		\begin{itemize}
-			\item minimalną ilość nukleotydów w pętli używając opcji \mbox{-m} (domyślnie: \mbox{-m} 4),
+			\item minimalną ilość nukleotydów w pętli - używając opcji \mbox{-m} (domyślnie: \mbox{-m} 4),
 			\item oraz wartości w macierzy energii (opcja -e) w formacie listy list (np. \mbox{-e} [[0,0,0,2],[0,0,3,0],[0,3,0,3],[2,0,1,0]] ). Przy czym kolejne kolumny i wiersze odnoszą się do nazw nukleotydów w kolejności alfabetycznej - A, C, G, U.
 		\end{itemize}
 	
-	\item Wizualizacja
+	\item Wizualizacja - po uruchomienu programu otwiera się ponaddto okno z prostą graficzną wizualizacją połączeń pomiędzy cząsteczkami.
 	
 	
 	
@@ -143,26 +139,68 @@ Prezentowany program rozwiązuje następujące zadanie: "Określ strukturę drug
 \begin{itemize}
 
 	\item Przygotowanie macierzy Nussinov oraz uzupełnienie jej wartości - implementacja tej części w głównej mierze została zainspirowana informacjami przekazanymi w wykładzie dr Roberta Nowaka \cite{bib:slajdyNowak})
-	\item Przejście zwrotne po macierzy w celu znalezienia par nukleotydów, tzw. Traceback. Istnieją różne możliwości implementacji tej procedury - w projekcie została wykorzystana jej elegancja wersja rekurencyjna (przedstawiona w materiałach udostępnionych przez uniwersytet w Tübingen \cite{bib:slajdyTubigen})
+	\item Przejście po otrzymanej macierzy w celu znalezienia par nukleotydów, tzw. Traceback. Istnieją różne możliwości implementacji tej procedury - w projekcie została wykorzystana jej elegancja wersja rekurencyjna (przedstawiona w materiałach udostępnionych przez uniwersytet w Tübingen \cite{bib:slajdyTubigen})
 	
 \end{itemize}
 
 
 \section{Przeprowadzone testy}
 
-%\input{oTestachBlackBox} 
+\subsection{Zrealizowane testy}
+Zrealizowane zostały cztery testy typu ,,black box'': dwa testy czasu wykonania programu, profilowanie kodu linijka po linijce oraz profilowanie pamięci wykorzystywanej przez program:
+
+\begin{itemize}
+\item timeTest.py - testowanie czasu wykonania, korzysta z pomocniczej klasy Timer;
+\item timetest.sh - oszacowanie czasu wykonania programu z wykorzystaniem standardowej UNIX komendy time;
+\item line\_profiler\_script.py - profilowanie kodu linijka po linijce;
+\item memory\_profiler\_script.sh - profilowanie pamięci wykorzystywanej programem.
 
 
-\section{Porównanie z działania z aplikacji}
+
+\end{itemize}
 
 
-\input{oInnychAplikajach} 
+Przeprowadzone testy wskazują na poprawne wykonanie procedury i stosunkowo oszczędne zużycie zasobów.
 
-\section{Wizualizacja wyników}
+\subsection{Kontrola wydajności kodu linijka po linijce}
+Do testowania wydajności kodu skorzystaliśmy z profilera autorstwa Roberta Kerna \cite{bib:Kern}. Za pomocą tego narzędzia można zobaczyć jak szybko i jak często wykonywana jest każda linijka kodu w skrypcie. Żeby móc korzystać z line\_profiler, najpierw należy go zainstalować:
+ 
+             \begin{center}
+   pip install line\_profiler
+\end{center}
+
+
+Zainstalowane zostaną: moduł line\_profiler oraz skrypt kernprof.py. Dla testowania kodu korzysta się z dekoratora @profil, który należy ustawić przed interesującymi nas funkcjami. Nic więcej nie potrzeba importować, ponieważ skrypt kernprof.py samodzielnie wkleja potrzebny kod w trakcie uruchomienia naszego skryptu. 
+Po uruchomieniu skryptu line\_profiler\_script.sh odbywa się testowanie interesujących nas funkcji. Wyniki testu zostają zapisane do pliku line\_profiler\_test.txt. 
+
+
+\subsection{Profiler pamięci}
+Na podstawie profilera Roberta Kerna\cite{bib:Kern}, Fabian Pedregose stworzył profiler pamięci memory\_profiler \cite{bib:mem}, który też cechuje się prostym i niezawodnym działaniem. Z danego profilera korzysta się, aby sprawdzić ilość pamięci wykorzystywanej przez  dany program. Żeby móc korzystać z memory\_profiler, musimy go zainstalować: 
+
+          \begin{center}
+          pip install -U memory\_profiler
+          
+                         pip install psutil
+                         
+\end{center}
+                         
+Instalujemy także psutil (skutkuje on lepszą wydajnością profilera). Dla testowania kodu również korzystamy z dekoratora @profile, którego ustawiamy przed interesującymi nas funkcjami.  Po uruchomieniu skryptu memory\_profiler\_script.sh odbywa się testowanie interesujących nas funkcji. Wyniki testowania zostają zapisane do pliku memory\_profiler\_test.txt. 
+
+
+
+
+
+\section{Porównanie działania aplikacji z komercyjnym odpowiednikiem}
+
+
+W celu dodatkowego potwierdzenia skuteczności naszego programu skonfrontowano jego działanie z komercyjnie dostępnym narzędziem: RNA Secondary Structure Prediction and Analysis on the web \cite{bib:innaApp}
+
+Porównywanie wyników predykcji struktury drugorzędowej sekwencji nukleotydów RNA pokazało, iż zaimplementowany przez nas algorytm Nussinov działa poprawnie. W porównaniu do wyżej wymienionego odpowiednika nasz program działa szybciej, ponieważ przeprowadza znacznie prostszą analizę danych (przeprowadza jedynie predykcję struktury drugorzędowej). Przygotowana przez nas wizualizacja wyników również pozostawia wiele do życzenia z porównaniem do swojego odpowiednika.
+
 
 \section{Wnioski}
 
-Jakieś wnioski
+W ramach projektu został zaimplementowany algorytm Nussinov dla predykcji struktury drugorzędowej cząsteczek RNA. Stworzony program jest aplikacją konsolową, która pozwala użytkownikowi wprowadzać sekwencje nukleotydów oraz inne ważne parametry algorytmu. Wynikiem działania programu jest lista par indeksów tych nukleotydów które łączą się ze sobą w strukturze drugorzędowej - zwrócona na konsole oraz do pliku. Ponadto wyświetlona zostaje również graficzna interpretacja otrzymanych wyników. Jako źródło przykładowych danych zostały wykorzystane wybrane ciągi z bazy danych RNA STRAND v2.0 \cite{bib:baza}. Ponadto przeprowadzone zostały różnego rodzaju testy wydajnościowe (czasowe i porównujące zużycie zasobów komputera). Porównując wyniki działania programu oraz już istniejących rozwiązań wnioskujemy, iż program działa poprawnie, a przyjęty algorytm jest skuteczny w teoretycznych rozważaniach nad strukturami drugorzędowymi DNA.
 
 \renewcommand{\refname}{\normalfont\selectfont\normalsize Literatura i źródła} 
 

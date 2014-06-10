@@ -1,30 +1,37 @@
 \subsection{Zrealizowane testy}
-Zrealizowane zostały 4 tak zwane testy “czarnej skrzynki”: 2 testy czasu wykonania programu, profilowanie kodu linijka po linijce a także profilowanie pamięci wykorzystywanej programem:
-1. timeTest.py - nasza wersja testowania czasu wykonania, korzysta z pomocniczej klasy Timer;
-2. timetest.sh - oszacowanie czasu wykonania programu z wykorzystaniem standardowej UNIX komendy time;
-Inne dwa testujące skrypty są bardziej skomplikowane. Szczegóły pracy z tymi skryptami są zamieszczone w poszczególnych skryptach:
-3. line_profiler_script.sh - profilowanie kodu linijka po linijce;
-4. memory_profiler_script.sh - profilowanie pamięci wykorzystywanej programem.
+Zrealizowane zostały cztery tak zwane testy typu ,,black box'': dwa testy czasu wykonania programu, profilowanie kodu linijka po linijce oraz profilowanie pamięci wykorzystywanej przez program:
+\begin{itemize}
+\item timeTest.py - testowanie czasu wykonania, korzysta z pomocniczej klasy Timer;
+\item timetest.sh - oszacowanie czasu wykonania programu z wykorzystaniem standardowej UNIX komendy time;
+\item line_profiler_script.sh - profilowanie kodu linijka po linijce;
+\item memory_profiler_script.sh - profilowanie pamięci wykorzystywanej programem.
 
-\subsection{Profiler linijka po linijce}
-Dla testowania wydajności kodu skorzystaliśmy się z profilera Roberta Kerna (https://pythonhosted.org/line_profiler/). Za pomocą tego narzędzia można zobaczyć jak szybko i jak często wykonywana jest każda linijka kodu w naszym skrypcie. Żeby móc korzystać z line_profiler, najpierw musimy go zainstalować: 
+\end{itemize}
+
+\subsection{Kontrola wydajności kodu linijka po linijce}
+Dla testowania wydajności kodu skorzystaliśmy z profilera autorstwa Roberta Kerna \cite{bib:Kern}. Za pomocą tego narzędzia można zobaczyć jak szybko i jak często wykonywana jest każda linijka kodu w naszym skrypcie. Żeby móc korzystać z line_profiler, najpierw należy go zainstalować:
+ 
                 pip install line_profiler
-Zainstalowane zostaną moduł "line_profiler" oraz skrypt "kernprof.py". Dla testowania kodu korzystamy z dekoratora "@profile", którego ustawiamy przed interesującymi nas funkcjami. Nic więcej nie potrzebno importować, ponieważ skrypt kernprof.py samodzielnie wkleja potrzebny kod w trakcie uruchomienia naszego skryptu. 
-Po uruchomieniu skryptu line_profiler_script.sh odbywa się testowanie interesujących nas funkcji. Wyniki testowania zostają zapisane do pliku line_profiler_test.txt. 
+
+
+Zainstalowane zostaną: moduł "line_profiler" oraz skrypt "kernprof.py". Dla testowania kodu korzysta się z dekoratora "@profile", który należy ustawić przed interesującymi nas funkcjami. Nic więcej nie potrzeba importować, ponieważ skrypt kernprof.py samodzielnie wkleja potrzebny kod w trakcie uruchomienia naszego skryptu. 
+Po uruchomieniu skryptu line_profiler_script.sh odbywa się testowanie interesujących nas funkcji. Wyniki testu zostają zapisane do pliku line_profiler_test.txt. 
 
 \subsection{Profiler pamięci}
-Na podstawie profilera Roberta Kerna przez Fabiana Pedregosę został stworzony profiler pamięci memory_profiler (https://github.com/fabianp/memory_profiler), który też cechuje się prostym i niezawodnym działanie. Korzystamy z danego profilera żeby przetestować ilość pamięci, wykorzystywanej przez zaimplementowany nami skrypt. Żeby móc korzystać z memory_profiler, musimy go zainstalować: 
+Na podstawie profilera Roberta Kerna\cite{bib:Kern}, Fabian Pedregose stworzył profiler pamięci memory_profiler \cite{bib:mem}, który też cechuje się prostym i niezawodnym działaniem. Z danego profilera korzysta się, aby sprawdzić ilość pamięci wykorzystywanej przez  dany program. Żeby móc korzystać z memory_profiler, musimy go zainstalować: 
 
                     pip install -U memory_profiler
                          pip install psutil
-Instalujemy także psutil, co sprawi lepszą wydajność profilera. 
-Dla testowania kodu również korzystamy z dekoratora "@profile", którego ustawiamy przed interesującymi nas funkcjami. Nic więcej nie potrzebno importować. Po uruchomieniu skryptu memory_profiler_script.sh odbywa się testowanie interesujących nas funkcji. Wyniki testowania zostają zapisane do pliku memory_profiler_test.txt. 
+                         
+                         
+Instalujemy także psutil (skutkuje on lepszą wydajnością profilera). Dla testowania kodu również korzystamy z dekoratora "@profile", którego ustawiamy przed interesującymi nas funkcjami.  Po uruchomieniu skryptu memory_profiler_script.sh odbywa się testowanie interesujących nas funkcji. Wyniki testowania zostają zapisane do pliku memory_profiler_test.txt. 
 
-\subsection{Testy dla różnych sekwencji}
+\subsection{Testy różnych sekwencji}
 
 Poniżej przedstawione są wyniki działania skryptów testowych dla 2 różnych sekwencji: 
+\begin{itemize}
 
-1. GGGAAAAAACCC
+\item GGGAAAAAACCC
 
 timeTest.py
 
@@ -37,7 +44,7 @@ user	0m0.503s
 sys	0m0.112s                                   
 
 
-2. GUGAACCUGGCGGCGUGCCUAAUACAUGCAAGUCGAACGAUGAAGUCCUAGCUUGCUAGGAUGGAUUAGUGGCGCACGGGUGAGUAAUGUAUAGCUAAUCUGCCCCAUAGAGAGGAACAACACUUAGAAAUGAGUGCUAAUACCUCAUACUCCAAUUAUACAUAAGUUUAAUUGGGAAAUGUAGCUCUUAAUAAUAUAUAUCAAAGAUAAUUUAUAAAUAAAAAGUUAUAAAUAUAACAAUAAGCUUUUUUGAAGCUUUAUAUUAAUAAAGCGAAAAAAAAGCAAAGCAGUUAGAUUUAAUAAAUUUUUAUAGCAUUUAAAAAUACAAAAGACUUAAUUUUUAAAUCUAAAUAUAAAUUAUUACUAAUAUUUUUAAUAGGCAGAAAUGUUAAGACAGGUGCUGCACGGCUGUCGUCAGCUCGUGUCGUGAGAUGUUGGGUUAAGUCCCGCAACGAGCGCAACCCACGUGUUUAGUUGCUAACAGUUAGGCUGAGCACUCUAAACAGACUGCCUUCGUAAGGAGGAGGAAGGUGUGGACGACGUCAAGUCAUCAUGGCCCUUAUGUCCGGGGCGACACACGUGCUACAAUGGCAUAUACAAUAAGACGCAAUAUCGCGAGAUGGAGCAAAUCUAUAAAAUAUGUCCCAGUUCGGAUUGGAGUCUGCAACUCGACUCCAUGAAGCCGGAAUCGCUAGUAAUCGUAGAUCAGCCAUGCUACGGUGAAUACGUUCCCGGGUCUUGUACUCACCGCCCGUCACACCAUGGGAGUUGAUUUCACUCGAAGCCCAAAUACCAAAUUGGUUAUGGUCCACAGUGGAAUCAGCGACUGGGGUGAAGUCGUAACAAGGUAACCGUAGGAGAAC
+\item GUGAACCUGGCGGCGUGCCUAAUACAUGCAAGUCGAACGAUGAAGUCCUAGCUUGCUAGGAUGGAUUAGUGGCGCACGGGUGAGUAAUGUAUAGCUAAUCUGCCCCAUAGAGAGGAACAACACUUAGAAAUGAGUGCUAAUACCUCAUACUCCAAUUAUACAUAAGUUUAAUUGGGAAAUGUAGCUCUUAAUAAUAUAUAUCAAAGAUAAUUUAUAAAUAAAAAGUUAUAAAUAUAACAAUAAGCUUUUUUGAAGCUUUAUAUUAAUAAAGCGAAAAAAAAGCAAAGCAGUUAGAUUUAAUAAAUUUUUAUAGCAUUUAAAAAUACAAAAGACUUAAUUUUUAAAUCUAAAUAUAAAUUAUUACUAAUAUUUUUAAUAGGCAGAAAUGUUAAGACAGGUGCUGCACGGCUGUCGUCAGCUCGUGUCGUGAGAUGUUGGGUUAAGUCCCGCAACGAGCGCAACCCACGUGUUUAGUUGCUAACAGUUAGGCUGAGCACUCUAAACAGACUGCCUUCGUAAGGAGGAGGAAGGUGUGGACGACGUCAAGUCAUCAUGGCCCUUAUGUCCGGGGCGACACACGUGCUACAAUGGCAUAUACAAUAAGACGCAAUAUCGCGAGAUGGAGCAAAUCUAUAAAAUAUGUCCCAGUUCGGAUUGGAGUCUGCAACUCGACUCCAUGAAGCCGGAAUCGCUAGUAAUCGUAGAUCAGCCAUGCUACGGUGAAUACGUUCCCGGGUCUUGUACUCACCGCCCGUCACACCAUGGGAGUUGAUUUCACUCGAAGCCCAAAUACCAAAUUGGUUAUGGUCCACAGUGGAAUCAGCGACUGGGGUGAAGUCGUAACAAGGUAACCGUAGGAGAAC
 
 timeTest.py
 
@@ -49,4 +56,4 @@ real	0m45.319s
 user	0m42.562s
 sys	0m0.235s
 
-
+\end{itemize}
