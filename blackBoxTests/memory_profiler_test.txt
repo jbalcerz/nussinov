@@ -1,3 +1,30 @@
 Testing using memory profiler:
-input: GGGAAAACCC
-output: [(0, 9), (1, 8), (2, 7)]
+input: GGGAAAAAACCC
+output: [(0, 11), (1, 10), (2, 9)]
+Filename: /Users/sieteestrellas/Desktop/nussinov/src/nussinov.py
+
+Line #    Mem usage    Increment   Line Contents
+================================================
+    54   36.863 MiB    0.000 MiB       @profile
+    55                                 def _traceback(self,i,j):
+    56   36.863 MiB    0.000 MiB           if math.isnan(self._sMatrix[i][j]):
+    57                                         raise NussinovException(2,'sMatrix is not build yet!')
+    58                                         return
+    59   36.867 MiB    0.004 MiB           if i < j:
+    60   36.863 MiB   -0.004 MiB               if self._sMatrix[i][j] == self._sMatrix[i+1][j]:
+    61   36.867 MiB    0.004 MiB                   self._traceback(i+1,j)
+    62   36.844 MiB   -0.023 MiB               elif self._sMatrix[i][j] == self._sMatrix[i][j-1]:
+    63                                             self._traceback(i,j-1)
+    64   36.844 MiB    0.000 MiB               elif self._sMatrix[i][j] == (self._sMatrix[i+1][j-1] 
+    65   36.844 MiB    0.000 MiB                                            + self._getEnergy(self._chain[i],self._chain[j])):
+    66   36.844 MiB    0.000 MiB                   self._outputPairs.append((i,j))
+    67   36.867 MiB    0.023 MiB                   self._traceback(i+1,j-1)
+    68                                         else:
+    69                                             for k in range(i+1,j):
+    70                                                 if self._sMatrix[i][j] == (self._sMatrix[i][k] 
+    71                                                                            + self._sMatrix[k+1][j]):
+    72                                                     self._traceback(i,k)
+    73                                                     self._traceback(k+1,j)
+    74                                                     break
+
+
