@@ -13,10 +13,5 @@
 # Like line_profiler, memory_profiler requires that we decorate our function of interest with an @profile decorator.
 # Results of the test are being saved to the 'memory_profile_test.txt' file.
 
-if [ "$1" == "" ]
-then
-echo "You need to pass the nussinovCalculator.py file path and its arguments"
-exit 1
-fi
-echo "Testing using memory profiler:" > blackBoxTestsAndProfiling/memory_profiler_test.txt
-python -m memory_profiler "$1" >> blackBoxTestsAndProfiling/memory_profiler_test.txt
+echo "Testing using memory profiler:" > memory_profiler_test.txt
+python -m memory_profiler main.py -i sequences/1.txt -o output.txt >> memory_profiler_test.txt
