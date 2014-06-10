@@ -81,6 +81,7 @@
 \author{Jerzy Balcerzak,
 Oleg Druzhynets} % Your name
 
+
 \date{\normalsize\today} % Today's date or a custom date
 
 \begin{document}
@@ -91,11 +92,9 @@ Oleg Druzhynets} % Your name
 %	PROBLEM 1
 %----------------------------------------------------------------------------------------
 
-JAKIŚ WSTĘP: Jednym z podstawowych problemów nad którego rozwiązaniem pracuje wiele naukowców badających kwasy rybonukleinowe (RNA) to określenie trójwymiarowej struktury molekuł. Jednak w przypadku kwasów RNA, ostateczna budowa molekuły jest w dużej mierze zdeterminowana poprzez drugorzędową strukturę RNA. Na przełomie lat 70' i 80' ubiegłego wieku, zespół badawczy dr Ruth Nussinov zaproponował metodykę przewidywania możliwych drugorzędowych struktur jednoniociowych kwasów RNA \cite{bib:nuss1}\cite{bib:nuss2} wykorzystując w niej programowanie dynamiczne – to właśnie implementacji tego algorytmu będzie dotyczył poniżej przedstawiony projekt.
-
 \section{Cel projektu}
 
-	Celem projektu jest implementacja programu obliczającego strukturę drugorzędową cząsteczki DNA lub RNA wykorzystując algorytm Nussinov.
+	Celem projektu była implementacja programu obliczającego strukturę drugorzędową cząsteczki DNA lub RNA wykorzystując algorytm Nussinov.
 
 %----------------------------------------------------------------------------------------
 
@@ -105,20 +104,48 @@ JAKIŚ WSTĘP: Jednym z podstawowych problemów nad którego rozwiązaniem pracu
 
 \section{Użyte technologie}
 
-Tworzony w ramach projektu program będzie miał naturę aplikacji konsolowej - po jego uruchomieniu, użytkownik będzie mógł wprowadzić ciągi znaków wczytując wskazany plik, bądź też wpisując dane z klawiatury. 
-Program zwróci czytelną reprezentację struktury drugorzędowej na konsolę oraz również do pliku.
+Stworzony program został całkowicie przygotowany w języku Python w standardowej wersji 2.7. Wybór padł właśnie na ten język programowania przede wszystkim ze względu na jego obiektowy charakter, przejrzystość składni oraz bogactwo bibliotek. 
+
+Duża część kodu głównego algorytmu oraz modułu obsługi wejścia została przygotowywana w duchu metodyki Test Driven Developement (TDD). Świetnym narzędziem wykorzystanym podczas prac okazał się więc framework pyUnit.
+
+Ponaddto, do testów gotowego już programu wykorzystano: ... Wizualizacja otrzymanych wyników została oparta o bibliotekę networkx.
 
 \section{Osiągnięta funkcjonalność aplikacji}
 
-Tworzony w ramach projektu program będzie miał naturę aplikacji konsolowej - po jego uruchomieniu, użytkownik będzie mógł wprowadzić ciągi znaków wczytując wskazany plik, bądź też wpisując dane z klawiatury. 
-Program zwróci czytelną reprezentację struktury drugorzędowej na konsolę oraz również do pliku.
+W ramach projektu stworzono prostą w obsłudze aplikację konsolową (nussinovCalculator.py). Jej funkcjonalność można opisać następująco:
+
+\begin{itemize}
+	\item Pomoc dla użytkownika - wywołanie programu z parametrem -h wyświetla pulę obsługiwanych opcji oraz ich domyślne parametry.
+	\item Wejście - wywołanie programu z opcją -i oraz podaną nazwą pliku (np. ./nussinovCalculator.py -i "NazwaPliku.txt") spowoduje odczytanie z pliku ciągów nukleotydów (można podać ich wiele w kilku linijkach) i przeprowadzenie algorytmu nussinov dla każdego z nich. Program można wywołać bez tej opcji (wtedy domyślnie odczytywane są dane z pliku "input.txt"), jak również podać ciąg nukleotydów prosto do konsoli używając opcji \mbox{-r} (np. \mbox{-r} GGGAAAACCC)
+	\item Wyjście - domyślnie program wypisuje wynik na konsolę oraz zwraca plik "output.txt" w postaci listy par indeksów nukleotydów które będą połączone w strukturze drugorzędowej. Uzywając opcji -o można wskazać plik do którego dane mają być zapisane (np. -o outputs/out1.txt).
+	\item Parametryzacja algorytmu - przy uruchamianiu programu użytkownik może dodatkowo wprowadzić:
+		\begin{itemize}
+			\item minimalną ilość nukleotydów w pętli używając opcji \mbox{-m} (domyślnie: \mbox{-m} 4),
+			\item oraz wartości w macierzy energii (opcja -e) w formacie listy list (np. \mbox{-e} [[0,0,0,2],[0,0,3,0],[0,3,0,3],[2,0,1,0]] ). Przy czym kolejne kolumny i wiersze odnoszą się do nazw nukleotydów w kolejności alfabetycznej - A, C, G, U.
+		\end{itemize}
+	
+	\item Wizualizacja
+	
+	
+	
+	
+
+
+
+\end{itemize}
+
 
 
 \section{Opis zastosowanego algorytmu}
 
-Tworzony w ramach projektu program będzie miał naturę aplikacji konsolowej - po jego uruchomieniu, użytkownik będzie mógł wprowadzić ciągi znaków wczytując wskazany plik, bądź też wpisując dane z klawiatury. 
-Program zwróci czytelną reprezentację struktury drugorzędowej na konsolę oraz również do pliku.
+Prezentowany program rozwiązuje następujące zadanie: "Określ strukturę drugorzędową dla danej sekwencji nukleotydów". Do rozwiązania tego problemu użyto algorytmu zaproponowanego przez profesor Nussinov \cite{bib:nuss1}\cite{bib:nuss2} opierającego swoje działanie na metodyce programowania dynamicznego. Ogólnikowo, przebieg algorytmu przedstawiają się następująco:
 
+\begin{itemize}
+
+	\item Przygotowanie macierzy Nussinov oraz uzupełnienie jej wartości - implementacja tej części w głównej mierze została zainspirowana informacjami przekazanymi w wykładzie dr Roberta Nowaka \cite{bib:slajdyNowak})
+	\item Przejście zwrotne po macierzy w celu znalezienia par nukleotydów, tzw. Traceback. Istnieją różne możliwości implementacji tej procedury - w projekcie została wykorzystana jej elegancja wersja rekurencyjna (przedstawiona w materiałach udostępnionych przez uniwersytet w Tübingen \cite{bib:slajdyTubigen})
+	
+\end{itemize}
 
 
 \section{Przeprowadzone testy}

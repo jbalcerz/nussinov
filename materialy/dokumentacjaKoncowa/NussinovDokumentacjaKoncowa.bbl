@@ -7,6 +7,17 @@ Nussinov, Ruth; Pieczenik, George; Griggs, Jerrold R.; Kleitman, Daniel J. (1 Ju
 
 \bibitem{bib:nuss2}
 Nussinov, R; Jacobson, AB (Nov 1980). "Fast algorithm for predicting the secondary structure of single-stranded RNA.". Proceedings of the National Academy of Sciences of the United States of America 77 (11): 6309–6313. doi:10.1073/pnas.77.11.6309. PMC 350273. PMID 6161375.
+
+
+
+	
+\bibitem{bib:slajdyNowak}
+Dr Robert Nowak. Slajdy do wykładu "Metody Bioinformatyki (MBI)"). Politechnika Warszawska, \url{http://staff.elka.pw.edu.pl/~rnowak2/dyd/mbi2014L/index.html}
+
+\bibitem{bib:slajdyTubigen}
+Prof. Dr. Daniel Huson, Dr. Christoph Dieterich . "Sript for Algorithms in Bioinformatics I Lecture". The University of Tübingen, \url{http://ab.inf.uni-tuebingen.de/teaching/ws06/albi1/script/protstruct2d_20Dec2006.pdf}
+
+
 \bibitem{bib:baza}
 RNA STRAND v2.0 - The RNA secondary STRucture and statistical ANalysis Database,
 \url{http://www.rnasoft.ca/strand/}
