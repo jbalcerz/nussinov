@@ -1,0 +1,158 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% TeX encoding = utf8
+% TeX spellcheck = pl_PL
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+%_________________________________________________________________
+%dopisane przeze mnie:
+
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+\sloppy %zakaz wydłużania lini (gdzy nie może złożyć)
+\clubpenalty=10000 %to kara za sierotki 
+\widowpenalty=10000 %nie pozostawia wdów 
+\brokenpenalty=10000 %nie dieli wyrazów pomiędzy stronami 
+\usepackage{indentfirst} %wcina 1 akapit (wg polskiej typografii wskazane) 
+\usepackage{color,graphicx}
+\usepackage{enumerate}
+\usepackage{url}
+%_________________________________________________________________
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Metody bioinformatyki: Dokumentacja końcowa projektu} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Implementacja algorytmu Nussinov do obliczania struktury drugorzędowej DNA i RNA \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Jerzy Balcerzak,
+Oleg Druzhynets} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+JAKIŚ WSTĘP: Jednym z podstawowych problemów nad którego rozwiązaniem pracuje wiele naukowców badających kwasy rybonukleinowe (RNA) to określenie trójwymiarowej struktury molekuł. Jednak w przypadku kwasów RNA, ostateczna budowa molekuły jest w dużej mierze zdeterminowana poprzez drugorzędową strukturę RNA. Na przełomie lat 70' i 80' ubiegłego wieku, zespół badawczy dr Ruth Nussinov zaproponował metodykę przewidywania możliwych drugorzędowych struktur jednoniociowych kwasów RNA \cite{bib:nuss1}\cite{bib:nuss2} wykorzystując w niej programowanie dynamiczne – to właśnie implementacji tego algorytmu będzie dotyczył poniżej przedstawiony projekt.
+
+\section{Cel projektu}
+
+	Celem projektu jest implementacja programu obliczającego strukturę drugorzędową cząsteczki DNA lub RNA wykorzystując algorytm Nussinov.
+
+%----------------------------------------------------------------------------------------
+
+
+%------------------------------------------------
+
+
+\section{Użyte technologie}
+
+Tworzony w ramach projektu program będzie miał naturę aplikacji konsolowej - po jego uruchomieniu, użytkownik będzie mógł wprowadzić ciągi znaków wczytując wskazany plik, bądź też wpisując dane z klawiatury. 
+Program zwróci czytelną reprezentację struktury drugorzędowej na konsolę oraz również do pliku.
+
+\section{Osiągnięta funkcjonalność aplikacji}
+
+Tworzony w ramach projektu program będzie miał naturę aplikacji konsolowej - po jego uruchomieniu, użytkownik będzie mógł wprowadzić ciągi znaków wczytując wskazany plik, bądź też wpisując dane z klawiatury. 
+Program zwróci czytelną reprezentację struktury drugorzędowej na konsolę oraz również do pliku.
+
+
+\section{Opis zastosowanego algorytmu}
+
+Tworzony w ramach projektu program będzie miał naturę aplikacji konsolowej - po jego uruchomieniu, użytkownik będzie mógł wprowadzić ciągi znaków wczytując wskazany plik, bądź też wpisując dane z klawiatury. 
+Program zwróci czytelną reprezentację struktury drugorzędowej na konsolę oraz również do pliku.
+
+
+
+\section{Przeprowadzone testy}
+
+\subsection{Testy jednostkowe}
+o testach jednostkowych 
+
+\input{oTestachBlackBox} 
+
+\section{Porównanie z wynikami innych aplikacji}
+
+\input{oInnychAplikajach} 
+
+\section{O wizualizacji}
+
+\section{Wnioski}
+
+Jakieś wnioski
+%----------------------------------------------------------------------------------------
+
+\renewcommand{\refname}{\normalfont\selectfont\normalsize Literatura i źródła} 
+
+
+\begin{thebibliography}{1}
+
+\bibitem{bib:nuss1}
+Nussinov, Ruth; Pieczenik, George; Griggs, Jerrold R.; Kleitman, Daniel J. (1 July 1978). "Algorithms for Loop Matchings". SIAM Journal on Applied Mathematics 35 (1): 68–82. doi:10.1137/0135006.
+
+\bibitem{bib:nuss2}
+Nussinov, R; Jacobson, AB (Nov 1980). "Fast algorithm for predicting the secondary structure of single-stranded RNA.". Proceedings of the National Academy of Sciences of the United States of America 77 (11): 6309–6313. doi:10.1073/pnas.77.11.6309. PMC 350273. PMID 6161375.
+\bibitem{bib:baza}
+RNA STRAND v2.0 - The RNA secondary STRucture and statistical ANalysis Database,
+\url{http://www.rnasoft.ca/strand/}
+
+
+\end{thebibliography}
+\end{document}
