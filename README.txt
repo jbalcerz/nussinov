@@ -4,6 +4,7 @@ nussinov
  Implementacja algorytmu Nussinov do obliczania struktury drugorzędowej DNA i RNA
 
  Dokumentacja znajduje się w materialy/dokumentacjaKoncowa
+ Przykładowe dane wejściowe znajdują się w examplSeq
 
 przykłady użycia:
 
